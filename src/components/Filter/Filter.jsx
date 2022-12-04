@@ -1,10 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
 
+import { getFilter } from 'redux/selectors';
+import { setFilter } from 'redux/filterSlice';
 import css from 'components/Filter/Filter.module.css';
 
-export const Filter = ({ filter, onFilter }) => {
+export const Filter = () => {
+  const dispatch = useDispatch();
+  const filter = useSelector(getFilter);
+
   const inputID = nanoid();
 
   return (
@@ -16,15 +20,13 @@ export const Filter = ({ filter, onFilter }) => {
           type="text"
           value={filter}
           name="filter"
-          onChange={onFilter}
+          onChange={e => {
+            console.log(setFilter);
+            dispatch(setFilter(e.target.value));
+          }}
           className={css.input}
         ></input>
       </label>
     </section>
   );
-};
-
-Filter.propTypes = {
-  filter: PropTypes.string,
-  onFilter: PropTypes.func,
 };
