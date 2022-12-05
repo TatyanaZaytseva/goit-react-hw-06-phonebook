@@ -20,10 +20,7 @@ export const Filter = () => {
           type="text"
           value={filter}
           name="filter"
-          onChange={e => {
-            console.log(setFilter);
-            dispatch(setFilter(e.target.value));
-          }}
+          onChange={e => dispatch(setFilter(e.target.value))}
           className={css.input}
         ></input>
       </label>
